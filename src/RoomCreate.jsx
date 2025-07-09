@@ -7,11 +7,15 @@ export default function RoomCreate() {
 
   const handleCreate = async () => {
     if (!roomName) return;
-    const docRef = await addDoc(collection(db, "rooms"), {
-      name: roomName,
-      members: []
-    });
-    alert("房間建立成功，ID: " + docRef.id);
+    try {
+      const docRef = await addDoc(collection(db, "rooms"), {
+        name: roomName,
+        members: []
+      });
+      alert("房間建立成功，ID: " + docRef.id);
+    } catch (err) {
+      console.error("❌ 發生錯誤:", err.code, err.message);
+    }
   };
 
   return (
